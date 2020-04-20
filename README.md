@@ -1,4 +1,11 @@
-# This is a boilerplate which was available on : https://github.com/andrew-r-king/sfml-vscode-boilerplate
+# This is a boilerplate
+It is available at : https://github.com/andrew-r-king/sfml-vscode-boilerplate
+
+# My Describtions
+---
+This is a repository to learn C++. I am also using SFML to learn some basics about graphics in C++.
+My idea for this project is to depelop a very basic game of *BLACK JACK*.
+---
 
 
 
