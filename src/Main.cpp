@@ -10,7 +10,7 @@
 //#include <vector>
 
 
-
+bool clickInRange(sf::Vector2f button_start_coordinates, sf::Vector2f button_size, sf::Vector2i mouse_pos );
 
 /*
 sf::RectangleShape createShapeOnPosWithSize(float height, float width, float x, float y ,sf::Texture*  shape_texture,std::string odjebi){
@@ -139,30 +139,83 @@ int main()
 	}
 	std::cout << std::endl;
 	*/
-	Carddeck dealer(sf::Vector2f{0,60},fs::absolute("").string()+"/content/PNG",10);
-	dealer.createFullDeck();
-	Card last = dealer.drawCard();
+	Carddeck full_deck(sf::Vector2f{0,60},fs::absolute("").string()+"/content/PNG",10);
+ 	full_deck.setCardSize(card_size);
+ 	full_deck.createFullDeck();
+	std::cout <<  "Full_deck score:" << full_deck.getDeckScore()<< std::endl;
+	//std::cout <<  "Full_deck score after draw: " << full_deck.getDeckScore() << std::endl;
 
-	Carddeck mycustomdeck(sf::Vector2f{0,60},fs::absolute("").string()+"/content/PNG",10);
-	mycustomdeck.addCard(last);
-	mycustomdeck.addCard(dealer.drawCard());
+	Carddeck dealer (sf::Vector2f{0,40},fs::absolute("").string()+"/content/PNG",0);
+	Carddeck player1(sf::Vector2f{0,60},fs::absolute("").string()+"/content/PNG",0);
+	Card drawcard(fs::absolute("").string()+"/content/PNG/green_back.png",card_size,sf::Vector2f{0,140}, "");
+	dealer.setCardSize(card_size);
+	dealer.addCard(full_deck.drawCard());
+	dealer.addCard(full_deck.drawCard());
+	//std::cout <<  "Full_deck score after second draw: " << full_deck.getDeckScore() << std::endl;
+	std::cout << "Dealer finished drawing! Dealer score: "<< dealer.getDeckScore()<<std::endl;
 
-
+	//green_back.png --> to bo za pobrat karto!
+	sf::Text textt;
+	textt.setString("Game On!!!");
+	sf::Font font;
+	font.loadFromFile(fs::absolute("").string()+"/content/fonts/arial.tff");
+	textt.setFont(font);
+	textt.setCharacterSize(24);
+	textt.setFillColor(sf::Color::White);
+	textt.setPosition(sf::Vector2f{150,250});
+	textt.setStyle(sf::Text::Bold);
 	while (window.isOpen())
 	{
+		/*
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+{
+    // left click...
+}
+// get global mouse position
+sf::Vector2i position = sf::Mouse::getPosition();
+*/
+		window.draw(textt);
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if(event.type == sf::Event::MouseButtonPressed){
+				if(event.mouseButton.button == sf::Mouse::Left){
+					//event.mouse
+					//sf::Vector2i mouse_position{event.mouseMove.x, event.mouseMove.y};
+					sf::Vector2i mouse_position{event.mouseButton.x, event.mouseButton.y};
+					//sf::Vector2i mouse_position = sf::Mouse::getPosition();
+					std::cout << "Mouse pressed at: " << mouse_position.x << " and , " << mouse_position.y <<std::endl;
+					std::cout << "Draw button clicked: " << clickInRange(drawcard.getCard().getPosition(), drawcard.getCard().getSize(), mouse_position) << std::endl;
+					std::cout << "Button size width: " << drawcard.getCard().getSize().x << " , button size height: "<< drawcard.getCard().getSize().y<<std::endl;
+					std::cout << "Button position x: " << drawcard.getCard().getPosition().x << " , button position y: "<< drawcard.getCard().getPosition().y<<std::endl;
+
+					dealer.addCard(full_deck.drawCard());
+					std::cout << "Delaer has new score of:  " << dealer.getDeckScore() << std::endl;
+				}
+			}
 		}
 
 		window.clear();
 
-		for(Card my_card : mycustomdeck.getDeck()){
+		window.draw(drawcard.getCard());
+		for(Card my_card : dealer.getDeck()){
 			window.draw(my_card.getCard());
 		}
 		window.display();
 	}
 
 	return 0;
+}
+
+//button_size.x -- width
+//button_size.y -- height
+bool clickInRange(sf::Vector2f button_start_coordinates, sf::Vector2f button_size, sf::Vector2i mouse_pos ){
+	if(
+		(mouse_pos.x >= button_start_coordinates.x && mouse_pos.x <= button_start_coordinates.x + button_size.x ) &&
+		(mouse_pos.y >= button_start_coordinates.y && mouse_pos.y <= button_start_coordinates.y +button_size.y)
+	){
+		return true;
+	}
+	return false;
 }

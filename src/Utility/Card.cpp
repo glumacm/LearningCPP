@@ -13,7 +13,7 @@ using namespace  std;
 	 * tocko!!!!
 	 */
 
-Card::Card(string relative_path, sf::Vector2f cardsize, sf::Vector2f coordinates)
+Card::Card(string relative_path, sf::Vector2f cardsize, sf::Vector2f coordinates, string cardtag)
 {
 	card_shape = sf::RectangleShape(cardsize);
 	card_shape.setPosition(coordinates);
@@ -26,10 +26,45 @@ Card::Card(string relative_path, sf::Vector2f cardsize, sf::Vector2f coordinates
 	card_texture->loadFromFile(relative_path);
 	//card_color = sf::Color::White;
 	card_shape.setTexture(card_texture);
+	generateCardValueFromStrig(cardtag);
 }
 
 Card::~Card()
 {
+}
+
+/**
+ * Primitivna resitev ampak zaenkrat bo ok.....
+ *
+ */
+void Card::generateCardValueFromStrig(string cardtag){
+	/**
+	 * PREDPOSTAVKA: Vsako ime karte je sestavljeno iz __stevilo____crka__ (npr. 10C, 2S ,...)
+	 * Zato bom vzel stevilo do zadnjega stringa, ker tam bo oznaka karte.
+	 */
+	if(cardtag == ""){
+		return;
+	}
+
+	string cardvaluestring = cardtag.substr(0, cardtag.size()-1);
+	vector<string> figures {"Q", "J", "K", "A"};
+	try
+	{
+		card_value = stoi(cardvaluestring);
+	}catch(std::exception e)
+	{
+		if(find(figures.begin(),figures.end(), cardvaluestring)!= figures.end()){
+			if(cardvaluestring == "A"){
+				card_value =11;
+				is_ace = true;
+			}else{
+				card_value = 10;
+			}
+			return;
+		}
+		cout << "There was an error when casting card value for card tag: " + cardtag << endl;
+	}
+
 }
 
 
