@@ -9,7 +9,7 @@ Carddeck::Carddeck(/* args */sf::Vector2f starting_position, string relative_pat
 	path_to_deck_textures = relative_path_to_images;
 }
 
-Carddeck::~Carddeck()
+Carddeck::Carddeck()
 {
 	path_to_deck_textures = "";
 	deck_position = {0,0};
@@ -77,6 +77,7 @@ void Carddeck::addCard(Card new_card){
 	size_of_deck+=1;
 }
 
+//Card Carddeck::drawCard(){
 Card Carddeck::drawCard(){
 	/**
 	 *

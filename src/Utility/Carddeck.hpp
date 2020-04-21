@@ -36,7 +36,7 @@ private:
 
 public:
 	Carddeck(/* args */sf::Vector2f starting_position, string relative_path_to_images, int deck_size);
-	~Carddeck();
+	Carddeck();
 	void addCard (Card new_card);
 	bool createFullDeck();
 	int randomizeShuffle(int i);
@@ -47,5 +47,6 @@ public:
 	void addCardValueToDeck(Card thecard);
 	Card drawCard();
 	void addStepOnCoordinates(sf::Vector2f* pos, sf::Vector2f* size, float offset);
+
 };
 

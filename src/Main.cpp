@@ -164,6 +164,14 @@ int main()
 	textt.setFillColor(sf::Color::White);
 	textt.setPosition(sf::Vector2f{150,250});
 	textt.setStyle(sf::Text::Bold);
+	//Card n("",card_size,sf::Vector2f{0,0},"");
+	//vector<Card> test {n};
+	/*
+	test.pop_back();
+	std::cout << "What happens when we remove from vector non existing element from back \n";
+	Card somenew = test.back();
+	cout << somenew.printString() << endl;
+	*/
 	while (window.isOpen())
 	{
 		/*
@@ -174,6 +182,8 @@ int main()
 // get global mouse position
 sf::Vector2i position = sf::Mouse::getPosition();
 */
+
+
 		window.draw(textt);
 		while (window.pollEvent(event))
 		{

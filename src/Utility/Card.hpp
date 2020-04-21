@@ -21,4 +21,5 @@ public:
 	bool isAce(){return is_ace;}
 	int getAceAlternativeValue(){return ace_alternative_value;}
 	void generateCardValueFromStrig(string cardtag);
+	string printString(){return "This is card: " + to_string(card_value);}
 };
