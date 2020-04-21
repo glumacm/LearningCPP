@@ -85,6 +85,9 @@ Card Carddeck::drawCard(){
 	 * izgubimo podatek ki ga referencira izbrisani podatek....
 	 */
 	//return my_cards.back();
+	if(my_cards.size() < 1){
+		return Card(true);
+	}
 	Card last_card = my_cards.back();
 	my_cards.pop_back();
 	deck_score-=last_card.getCardValue();

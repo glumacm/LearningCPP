@@ -17,8 +17,15 @@ Player::Player(string playername, float cashamount, sf::Vector2f playerpos){
 	player_position = playerpos;
 }
 
+/**
+ * Poskrbimo, da vemo ali je deck prazen.... Da lahko potem izpisemo na zaslonu , itd....
+ */
 bool Player::drawCard(Carddeck fulldeck){
 	Card drawn_card = fulldeck.drawCard();
+	if(!drawn_card.isNullable())
+	{
+		return false;
+	}
 	player_deck.addCard(drawn_card);
 	return true;
 }

@@ -33,6 +33,12 @@ Card::~Card()
 {
 }
 
+Card::Card(bool isnull){
+	is_null = isnull;
+}
+
+
+
 /**
  * Primitivna resitev ampak zaenkrat bo ok.....
  *
