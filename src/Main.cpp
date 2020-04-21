@@ -2,6 +2,8 @@
 #include "Utility/utilityFunctions.hpp"
 #include <memory>
 #include "Utility/Carddeck.hpp"
+#include "Utility/Button.hpp"
+//#include "Utility/Text.hpp"
 #include <string>
 #include <iostream>
 #include <experimental/filesystem>
@@ -156,13 +158,37 @@ int main()
 
 	//green_back.png --> to bo za pobrat karto!
 	sf::Text textt;
-	textt.setString("Game On!!!");
+	sf::Text blackjackgame;
+	sf::Text drawcardtext;
+	sf::Text winner;
+	sf::Text loser;
+	sf::Text gameover;
 	sf::Font font;
-	font.loadFromFile(fs::absolute("").string()+"/content/fonts/arial.tff");
+	font.loadFromFile(fs::absolute("").string()+"/content/fonts/arial.ttf");
+	float center_x = float(window.getSize().x/2)-(24*5);
+
+	cout << "Before text creation \n";
+	Text blackjacknew(24,"BLACK JACK",
+	fs::absolute("").string()+"/content/fonts/arial.ttf",
+	sf::Color::Green,true,sf::Vector2f{center_x,0});
+
+	cout << "Before button creatio n\n";
+	Button b1(sf::Vector2f{80,40},sf::Vector2f{20,50},
+	sf::Color::Red,"Draw card");//Kasneje dodamo centering besedila
+
+
 	textt.setFont(font);
-	textt.setCharacterSize(24);
-	textt.setFillColor(sf::Color::White);
-	textt.setPosition(sf::Vector2f{150,250});
+	blackjackgame.setFont(font);
+	drawcardtext.setFont(font);
+	winner.setFont(font);
+	loser.setFont(font);
+	gameover.setFont(font);
+
+	textt.setString("In my safe space.... my safe space.");
+
+	textt.setFillColor(sf::Color::Red);
+	textt.setCharacterSize(14);
+	//textt.setPosition(sf::Vector2f{0,80});
 	textt.setStyle(sf::Text::Bold);
 	//Card n("",card_size,sf::Vector2f{0,0},"");
 	//vector<Card> test {n};
@@ -184,7 +210,7 @@ sf::Vector2i position = sf::Mouse::getPosition();
 */
 
 
-		window.draw(textt);
+
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -207,7 +233,10 @@ sf::Vector2i position = sf::Mouse::getPosition();
 		}
 
 		window.clear();
-
+		//window.draw(textt);
+		//window.draw(blackjacknew.getTxt());
+		//blackjacknew.draw(&window);
+		b1.draw(&window);
 		window.draw(drawcard.getCard());
 		for(Card my_card : dealer.getDeck()){
 			window.draw(my_card.getCard());
