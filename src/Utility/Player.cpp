@@ -6,6 +6,7 @@ Player::Player(){
 	player_cash_amount = 0;
 	player_name = "Unknown player";
 	player_position = {0,0};
+	lowest_limit = 0;
 }
 
 
@@ -15,6 +16,21 @@ Player::Player(string playername, float cashamount, sf::Vector2f playerpos){
 	player_name = playername;
 	player_cash_amount = cashamount;
 	player_position = playerpos;
+	lowest_limit = 0;
+}
+
+
+bool Player::withdrawAmount(float someamount){
+	if(player_cash_amount - someamount <= lowest_limit){
+		std::cout << "Cannot withdraw money from player->Player lowerlimit reached.("<<lowest_limit<<")"<<std::endl;
+		return false;
+	}
+	player_cash_amount-=someamount;
+	return true;
+}
+
+void Player::addAmount(float someamount){
+	player_cash_amount+=someamount;
 }
 
 /**

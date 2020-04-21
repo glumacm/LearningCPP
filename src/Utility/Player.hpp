@@ -7,6 +7,7 @@ class Player
 		float player_cash_amount; //celoten znesek ki ga ima
 		Carddeck player_deck; //karte ki jih ima uporabnik
 		sf::Vector2f player_position;
+		float lowest_limit;
 	public:
 		Player();
 		Player(string playername, float cashamount, sf::Vector2f playerpos);
@@ -15,7 +16,9 @@ class Player
 		void setPlayerName(string playername) { player_name = playername;}
 		void setPlayerPosition(sf::Vector2f playerpos) { player_position = playerpos;}
 		float getPlayerCashAmount(){return player_cash_amount;}
+		bool withdrawAmount(float someamount);
 		bool drawCard(Carddeck fulldeck);
+		void addAmount(float someamount);
 		sf::Vector2f getPlayerPosition(){return player_position;}
 
 
