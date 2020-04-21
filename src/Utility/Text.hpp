@@ -26,5 +26,5 @@ class Text
 		void setText(string newtext){text_content = newtext;setTextProps();};
 		void draw(sf::RenderWindow* window){window->draw(txt);}
 		void setOrigin(sf::Vector2f origin){txt.setOrigin(origin);}
-		void setPosition(sf::Vector2f pos){txt.setPosition(pos);}
+		void setPosition(sf::Vector2f pos){text_position=pos;setTextProps();}
 };

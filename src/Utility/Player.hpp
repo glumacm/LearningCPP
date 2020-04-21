@@ -18,6 +18,7 @@ class Player
 		float getPlayerCashAmount(){return player_cash_amount;}
 		bool withdrawAmount(float someamount);
 		bool drawCard(Carddeck fulldeck);
+		string getPlayerName(){return player_name;}
 		void addAmount(float someamount);
 		sf::Vector2f getPlayerPosition(){return player_position;}
 

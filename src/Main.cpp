@@ -1,8 +1,9 @@
 #include "Platform/Platform.hpp"
 #include "Utility/utilityFunctions.hpp"
 #include <memory>
-#include "Utility/Carddeck.hpp"
-#include "Utility/Button.hpp"
+//#include "Utility/Carddeck.hpp"
+//#include "Utility/Button.hpp"
+#include "Utility/Player/PlayerUiContainer.hpp"
 //#include "Utility/Text.hpp"
 #include <string>
 #include <iostream>
@@ -176,6 +177,10 @@ int main()
 	Button b1(sf::Vector2f{80,40},sf::Vector2f{20,50},
 	sf::Color::Red,"Draw card");//Kasneje dodamo centering besedila
 
+	Player p1;
+	p1.setPlayerName("Player 1");
+	PlayerUiContainer pp1(p1);
+	pp1.setWindowReference(&window);
 
 	textt.setFont(font);
 	blackjackgame.setFont(font);
@@ -213,13 +218,14 @@ sf::Vector2i position = sf::Mouse::getPosition();
 
 		while (window.pollEvent(event))
 		{
+			pp1.checkAndUpdate(&event);
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if(event.type == sf::Event::MouseButtonPressed){
 				if(event.mouseButton.button == sf::Mouse::Left){
 					//event.mouse
 					//sf::Vector2i mouse_position{event.mouseMove.x, event.mouseMove.y};
-					sf::Vector2i mouse_position{event.mouseButton.x, event.mouseButton.y};
+					/*sf::Vector2i mouse_position{event.mouseButton.x, event.mouseButton.y};
 					//sf::Vector2i mouse_position = sf::Mouse::getPosition();
 					std::cout << "Mouse pressed at: " << mouse_position.x << " and , " << mouse_position.y <<std::endl;
 					std::cout << "Draw button clicked: " << clickInRange(drawcard.getCard().getPosition(), drawcard.getCard().getSize(), mouse_position) << std::endl;
@@ -228,6 +234,7 @@ sf::Vector2i position = sf::Mouse::getPosition();
 
 					dealer.addCard(full_deck.drawCard());
 					std::cout << "Delaer has new score of:  " << dealer.getDeckScore() << std::endl;
+					*/
 				}
 			}
 		}
@@ -236,7 +243,11 @@ sf::Vector2i position = sf::Mouse::getPosition();
 		//window.draw(textt);
 		//window.draw(blackjacknew.getTxt());
 		//blackjacknew.draw(&window);
-		b1.draw(&window);
+
+		pp1.draw();
+
+
+		//b1.draw(&window);
 		window.draw(drawcard.getCard());
 		for(Card my_card : dealer.getDeck()){
 			window.draw(my_card.getCard());

@@ -2,6 +2,11 @@
 #include "Game.hpp"
 
 namespace fs = experimental::filesystem;
+
+/**
+ * Ena ideja , ki sem jo imel je ta, da bi imel POINTER na naslednjega igralca. S tem bi lahko
+ * mannipuliral lazje potezo naslednjega igralca.
+ **/
 Game::Game()
 {
 	game_name = "Default game name";
@@ -17,7 +22,7 @@ Game::Game()
  * dodamo lahko le igralca ki:
  *  - ima dovolj denarja
  *  - ...
- */
+**/
 bool Game::addPlayer(Player newplayer)
 {
 	//preverimo ali ima dovolj denarja
